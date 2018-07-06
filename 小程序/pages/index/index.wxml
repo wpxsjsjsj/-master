@@ -1,0 +1,87 @@
+<!--index.wxml-->
+<view class="container">
+   <view class="search" style="display:{{searchHidden}}">
+     <view style="display: inline-block;float:left;position: relative;width:25%" bindtap='tumpCity'>
+       <text class="searchClass">{{localDetail}}</text>
+       <image class="searchImg" src="../../resource/images/more/pull.png"></image>
+     </view>
+     
+      <view class='searchInput'>
+          <image class="searchImg1" src="../../resource/images/more/search.png"></image>
+          <input type='text' placeholder='请输入内容'></input>
+          
+      </view>
+
+   
+   
+    </view>  
+   <view class="lunbo">
+    <swiper indicator-dots="{{indicatorDots}}"
+       autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular='true'>
+    <block wx:for-items="{{banner_list.banner}}">
+    <swiper-item>
+      <image src="{{item.pic_url}}" class="slide-image" />
+    </swiper-item>
+    </block>
+    </swiper>
+
+  <view>
+    <view class='hotgoodcontainer'>
+       <view class='gooditem' wx:for="{{hotgoods}}" wx:for-index="idx" wx:for-item="good" >
+       <view class='imgview' bindtap="nextPage" data-postId="{{good.name}}">
+          <image class='productimg' src='{{good.pic_url}}'/> </view>
+   
+       <view>{{good.name}}</view>
+   </view>
+   </view>  
+    
+    
+  </view>
+  <view>
+    <view class='floortitle'>
+        <view class='floortitlemoreicon'>最新行业</view>
+        <view class='floortitlemoretext'> 更多> </view> 
+    </view>
+    <view>
+      <image src="{{currentImg}}" class="curremtImg"></image>
+    
+    
+    </view>
+  
+  </view>
+   <view style="height:30px;background-color:#F1F1F1;text-align:center;">
+     <text style="color:#ccc;font-size:12px;">--我是有底线的--</text>
+   </view>
+
+   <modal class="modal" hidden="{{modalFlag}}" no-cancel bindconfirm="modalOk" confirmText="">
+    <view class="dew">
+      <view style="text-align:center">
+              <image src="../../resource/images/news/location.gif" alt="" class="age" style="width:100px;height:100px;"></image>
+      </view>
+      <view class="vedw" style="text-align:center">请稍后！ 定位中...{{status}}</view>
+     
+</view>
+</modal>
+
+  
+    </view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</view>

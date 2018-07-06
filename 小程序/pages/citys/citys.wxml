@@ -1,0 +1,9 @@
+ <view style="overflow:hidden;position:reliate">
+  <image class="searchImg1"  src="../../resource/images/more/search.png"></image>
+   <input type='text' bindblur='citySearch'  placeholder='请输入你要搜索的城市' class='citysInput' ></input>
+   <button value="搜索" bindtap='citySuer' class="citysButton">搜索</button>
+ </view>
+ 
+ <view class='wrapper'> 
+  <list-html data="{{city}}" binddetail="bindtap"  my-city='{{thisity}}'  search="{{value}}"></list-html>
+ </view> 

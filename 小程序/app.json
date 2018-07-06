@@ -1,0 +1,40 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/news/news",
+    "pages/men/men",
+    "pages/list/list",
+    "pages/citys/citys"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#7acfa6",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "务实务帮",
+    "backgroundColor": "#7acfa6",
+    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "color": "#7f848a",
+    "selectedColor": "#7acfa6",
+    "backgroundColor": "#f7f6fb",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "resource/images/index/index.png",
+        "selectedIconPath": "resource/images/index/index@active.png"
+      },
+      {
+        "pagePath": "pages/men/men",
+        "text": "我的",
+        "iconPath": "resource/images/index/more.png",
+        "selectedIconPath": "resource/images/index/more@active.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000
+  }
+}

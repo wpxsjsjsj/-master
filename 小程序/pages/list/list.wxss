@@ -1,0 +1,24 @@
+/* pages/list/list.wxss */
+.data-items{
+  width: 100%;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  overflow: hidden;
+}
+.data-item-img{
+  width: 20%;
+  height:150rpx;
+  float:left;
+  margin-right: 3%;
+  margin-left: 2%;
+}
+.data-item-text{
+   width: 73%;
+   padding: 5rpx;
+   height:150rpx;
+   float:left;
+}
+.star-image{
+  width: 15px;
+  height: 15px;
+}

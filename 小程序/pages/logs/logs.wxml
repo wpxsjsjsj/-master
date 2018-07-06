@@ -1,0 +1,99 @@
+//加载腾讯位置服务js文件（必须）
+	var qqmap=require('../../utils/qqmap-wx-jssdk.min.js')
+
+	//预加载内容
+	  onLoad: function () {
+	
+	    //调用腾讯地图sdk  添加腾讯地图key
+	
+	    var demo = new qqmap({
+	      key: '*****-*****-*****-*****-SY7PH-SMFTK'
+	    });
+	
+	     //此声明最好不要写在 wx.getLocation方法内，this指代不同
+	
+	     var that = this;
+	     wx.getLocation({
+	       type: 'gcj02',  //编码方式，
+	       success: function (res) {
+	         var latitude = res.latitude   // wx.getLocation 获取当前的地理位置、速度   latitude(维度)  longitude（经度）
+	         var longitude = res.longitude
+	         demo.reverseGeocoder({
+	          location: {
+	            latitude: res.latitude,
+	            longitude: res.longitude
+	          },
+	　　　　　　　//逆解析成功回调函数
+	          success: function (res) {
+	            getApp().globalData.cityname = res.result.address_component.city; 
+	　　　　　　 console.log("onLoad");
+
+	　　　　　　　//wx.request 发起网络请求，类似于ajax
+	            wx.request({
+	              url: 'https://www.xxxxxxxxxx.com/home/index/xcx_index',  //填写对应服务器地址
+	              data: {
+	                // cityid: getApp().globalData.cityid,     //我这里需要提交的参数，这里我是把获取的城市发给后台，然后后台给我对应城市的数据json文件
+	                cityna: getApp().globalData.cityna,
+	                district: res.result.address_component.city,
+	              },
+	              header: {
+	                "Content-Type": "applicatiSon/x-www-form-urlencoded"
+	              },
+	              method: "POST",
+	              success: function (res) {
+	                console.log(res.data.data);
+	　　　　　　　　　　　//解析回调函数得到的json文件并一层一层的解析然后数据绑定到页面上
+	                that.setData({
+	                  // 轮播图图片
+	                  imgurls: res.data.data.pics 58                 });
+	                getApp().globalData.cityid = res.data.data.datacompany.cityid;
+	                // this.data.pic_array_dq2[e.detail.value].name
+	              }
+	            });
+	　　　　　　　　　　// 成功后提醒
+	            wx.showModal({
+	              title: '定位成功',
+	              content: '当前城市：' + getApp().globalData.cityname,
+	            });
+	          },
+	          fail: function (res) {
+	　　　　　　　//失败的回调函数
+	            // console.log(res);
+	          },
+	          complete: function (res) {
+	　　　　　　　//完成之后的回调函数，不管是否成功
+	            console.log("逆解析状态码："+res.status);  //res.status  获取状态码，为0代表解析成功，但是我们要考虑失败的兼容，可能用户并不愿意同意获取地理位置，所以不为0 的时候也要加载内容给个默认地址
+	            if (res.status!=0){
+	              wx.request({
+	                url: 'https://www.cyzs97.com/home/index/xcx_index',
+	                data: {
+	                  // cityid: getApp().globalData.cityid,
+	                  cityna: getApp().globalData.cityna,
+	                  district:"",
+	                },
+	                header: {
+	                  "Content-Type": "applicatiSon/x-www-form-urlencoded"
+	                },
+	                method: "POST",
+	                success: function (res) {
+	                  console.log(res.data.data);
+	                  that.setData({
+	                    // 轮播图图片
+	                    imgurls: res.data.data.pics,   99                   });
+	                   getApp().globalData.cityid = res.data.data.datacompany.cityid;
+	                   // this.data.pic_array_dq2[e.detail.value].name
+	                 }
+	               });
+	　　　　　　　　　//提示用户失败可开启定位服务
+	               wx.showModal({
+	                 title: '定位失败',
+	                 content: '定位失败，未授权获取当前位置或服务错误' ,
+	               });
+	             }
+	             console.log("定位获取的：" + getApp().globalData.cityname);
+	           }
+	         });
+	       }
+	     });
+	
+	     },

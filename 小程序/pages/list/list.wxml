@@ -1,0 +1,32 @@
+<!--pages/list/list.wxml-->
+<view>
+  <view  style="overflow:hidden;">
+        <view class="data-items" wx:for="{{dataArray}}" wx:for-item="item" wx:key="id" bindtap="openmap" 
+              data-lat="{{item.lat}}" data-lng="{{item.lng}}" data-name="{{item.name}}" data-address="{{item.address}}">
+          <image class="data-item-img" mode="aspectFit" src="{{item.img}}"></image>
+          <view class="data-item-text">
+            <view style="width:100%; font-size: 30rpx; padding:2rpx;">{{item.name}}</view>
+            <view style="width:100%; font-size: 25rpx; padding:2rpx;">地址: {{item.address}}</view>
+            <view style="width:100%; font-size: 25rpx; padding:2rpx;">电话: {{item.phone}}</view>
+            <view style="width:100%; font-size: 25rpx; padding:2rpx;"> 
+                 <text>距离: {{item.detail}}</text>  
+                 
+                 <view style="float:right">
+                    <block wx:for="{{stars}}" wx:for-item="items" wx:for-index="index">
+                     <image class="star-image" style="left: {{items*150}}rpx" src="{{item.star>=(index+1)?start3 : item.star>index?start2:start1}}">
+
+ </image>
+
+</block>
+                 
+                 </view>  
+                 
+            </view>
+            
+          </view>
+        </view>
+      </view>
+
+
+
+</view>
